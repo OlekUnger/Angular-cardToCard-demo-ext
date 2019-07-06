@@ -1,0 +1,32 @@
+<div class="table-container">
+  <table *ngIf="!loader; else empty">
+    <thead>
+      <tr>
+        <th>№</th>
+        <th>Карта плательщика</th>
+        <th>Карта получателя</th>
+        <th>Сумма</th>
+        <th>Дата выполнения</th>
+        <th>Действие</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transaction of transactions; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{transaction.customerCard | cardNumber}}</td>
+        <td>{{transaction.consumerCard | cardNumber}}</td>
+        <td>{{transaction.amount}}</td>
+        <td>{{transaction.date | appMoment}}</td>
+        <td>
+          <button (click)="onRepeat(transaction.id)">Повторить</button>
+          <button (click)="onRemove(transaction.id)">Удалить</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #empty>
+    <p class="text-center">Loading...</p>
+  </ng-template>
+</div>
+

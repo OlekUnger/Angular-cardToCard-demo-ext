@@ -1,0 +1,140 @@
+
+.form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.cards {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.card {
+  width: 400px;
+  height: 250px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 0 20px;
+
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  &-title {
+    text-align: center;
+  }
+}
+
+.form-control {
+  padding: 0 10px;
+  width: 100%;
+  line-height: 30px;
+  outline: none;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 20px;
+
+}
+
+.card-number {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &-item {
+    display: block;
+    position: relative;
+    width: 70px;
+
+    &:not(:last-child) {
+      margin-right: 5px;
+    }
+  }
+}
+
+.form-group {
+  margin-bottom: 40px;
+}
+
+.red-text {
+  width: inherit;
+  background-color: #fff;
+  color: red;
+  font-size: 12px;
+  display: block;
+  position: absolute;
+  left: 0;
+
+  &.top {
+    top: -50px;
+  }
+
+  &.bottom {
+    bottom: 50px;
+  }
+}
+
+.error {
+  border: 2px solid red;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &-center {
+    justify-content: center;
+  }
+}
+
+.row-center {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+.fio {
+  width: 200px;
+  position: relative;
+}
+
+.selects {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.amount {
+  width: 150px;
+  margin-right: 20px;
+}
+
+.btn {
+  line-height: 40px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 0 15px;
+  &:hover:not(:disabled) {
+    background-color: #ccc;
+    cursor: pointer;
+  }
+  &:not(:disabled){
+    background-color: aquamarine;
+  }
+}
+
+.activeMonth, .activeYear, .amount {
+  position: relative;
+}

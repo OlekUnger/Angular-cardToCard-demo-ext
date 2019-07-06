@@ -1,0 +1,149 @@
+<div class="message" *ngIf="message">{{message}}</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+    <div class="cards">
+      <!-- Карта плательщика-->
+      <div class="card">
+        <h3 class="card-title">карта плательщика</h3>
+
+        <div class="">
+          <div class="form-group">
+            <div>
+              <label>номер</label>
+            </div>
+
+            <div class="card-number" formArrayName="customerCardNumber">
+              <div class="card-number-item" *ngFor="let number of form.get('customerCardNumber')['controls']; let i = index">
+                <input
+                    type="text"
+                    size="4"
+                    maxlength="4"
+                    class="form-control number"
+                    formControlName="{{i}}"
+                    [ngClass]="{error: number.invalid && number.touched}"
+                >
+                <span class="red-text top" *ngIf="number.invalid && number.touched">
+                  <span *ngIf="number.errors['required']">Поле номер обязательно</span>
+                  <span *ngIf="number.errors['error']">Должно быть 4 цифры</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="fio">
+                <div>
+                  <label>ФИ держателя</label>
+                </div>
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder=""
+                    formControlName="fio"
+                    [ngClass]="{error: form.get('fio').invalid && form.get('fio').touched}"
+                >
+                <span class="red-text"  *ngIf="form.get('fio').invalid && form.get('fio').touched">
+                  <span *ngIf="form.get('fio').errors['required']">Поле ФИО обязательно</span>
+                  <span *ngIf="form.get('fio').errors['error']">имя и фамилия англ. буквами</span>
+                </span>
+              </div>
+              <div>
+                <div>активна до</div>
+                <div class="selects">
+                  <div class="activeMonth select">
+
+                    <select
+                        class="form-control"
+                        formControlName="activeMonth"
+                        [ngClass]="{error: form.get('activeMonth').invalid && form.get('activeMonth').touched}"
+                    >
+                      <option value=""></option>
+                      <option value="{{month}}" *ngFor="let month of months">
+                        {{month | addZeroBeforeNumber}}
+                      </option>
+                    </select>
+                    <span class="red-text top" *ngIf="form.get('activeMonth').invalid && form.get('activeMonth').touched">
+                      <span *ngIf="form.get('activeMonth').errors['required']">Поле обязательно</span>
+                    </span>
+                  </div>
+
+                  <div class="activeYear select">
+                    <select
+                        class="form-control"
+                        formControlName="activeYear"
+                        [ngClass]="{error: form.get('activeYear').invalid && form.get('activeYear').touched}"
+                    >
+                      <option value=""></option>
+                      <option value="{{year}}" *ngFor="let year of years">
+                        {{year}}
+                      </option>
+                    </select>
+                    <span class="red-text top" *ngIf="form.get('activeYear').invalid && form.get('activeYear').touched">
+                      <span *ngIf="form.get('activeYear').errors['required']">Поле обязательно</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Карта получателя-->
+      <div class="card">
+        <h3 class="card-title">карта получателя</h3>
+
+        <div class="form-group">
+          <div>
+            <label>номер</label>
+          </div>
+          <div class="card-number" formArrayName="consumerCardNumber">
+            <div class="card-number-item" *ngFor="let number of form.get('consumerCardNumber')['controls']; let i = index">
+              <input
+                  type="text"
+                  size="4"
+                  maxlength="4"
+                  class="form-control number"
+                  formControlName="{{i}}"
+                  [ngClass]="{error: number.invalid && number.touched}"
+              >
+              <span class="red-text top" *ngIf="number.invalid && number.touched"  >
+                <span *ngIf="number.errors['required']">Поле номер обязательно</span>
+                <span *ngIf="number.errors['error']">Должно быть 4 цифры</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row-center">
+      <div class="amount">
+        <input
+            type="text"
+            size="10"
+            maxlength="10"
+            class="form-control"
+            placeholder="сумма"
+            formControlName="amount"
+            [ngClass]="{error: form.get('amount').invalid && form.get('amount').touched}"
+        >
+        <span class="red-text" *ngIf="form.get('amount').invalid && form.get('amount').touched">
+           <span *ngIf="form.get('amount').errors['required']">Поле обязательно</span>
+           <span *ngIf="form.get('amount').errors['error']">Только цифры.</span>
+        </span>
+
+      </div>
+
+      <button
+          type="submit"
+          class="btn"
+          [disabled]="form.invalid || form.disabled"
+      >ПЕРЕВЕСТИ</button>
+    </div>
+
+  </form>
+
+
+<!---->
