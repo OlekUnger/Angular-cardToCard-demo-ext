@@ -1,8 +1,10 @@
+
+if package.json.dev:
 ----------
 npm install
 
 ----------
-npm run start
+npm run dev
 
 ##--------
 
