@@ -3,8 +3,8 @@ const path = require('path');
 
 const app = express();
 
-app.use(express.static(__dirname + '/dist/unger-cardToCard-demo'));
+app.use(express.static(__dirname + '/dist/ang-test2'));
 app.get('/*', (req,res)=>{
-  res.sendFile(path.resolve(__dirname, 'dist/unger-cardToCard-demo/index.html'))
+  res.sendFile(path.resolve(__dirname, 'dist/ang-test2/index.html'))
 })
 app.listen(process.env.PORT || 8080);
