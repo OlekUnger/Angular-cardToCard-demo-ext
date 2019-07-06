@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ng build --output-path ungers-cardToCard-demo --aot --prod",
-    "server": "son-server --watch db.json --port 3000"
+    "server": "json-server --watch db.json --port 3000"
   },
   "engines": {
     "node": "10.15.3",
