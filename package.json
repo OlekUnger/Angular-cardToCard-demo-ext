@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "\"concurrently --kill-others \"node server.js\" \"npm run server\"",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ng build --output-path ungers-cardToCard-demo --aot --prod",
-    "server": "json-server --watch db.json --port 3000"
+    "dev": "ng serve"
   },
   "engines": {
     "node": "10.15.3",
@@ -28,7 +28,6 @@
     "@angular/platform-browser-dynamic": "~8.0.3",
     "@angular/router": "~8.0.3",
     "express": "^4.17.1",
-    "json-server": "^0.15.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "typescript": "~3.4.3",

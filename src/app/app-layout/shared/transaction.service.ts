@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {catchError, switchMap, tap} from 'rxjs/operators';
+import {catchError, filter, map, switchMap, tap} from 'rxjs/operators';
 
 export interface Transaction {
-    id?: number;
+    id?: string;
     consumerCard: string;
     customerCard: string;
     amount: number;
@@ -18,30 +18,32 @@ export interface Transaction {
     providedIn: 'root'
 })
 export class TransactionService {
-    private transaction = null;
+    static url = 'https://ungers-cardtocard-demo.firebaseio.com/transactions';
 
     constructor(private http: HttpClient) {
     }
 
     create(transaction: Transaction): Observable<any> {
-        return this.http.post<Transaction>(`http://localhost:3000/transactions`, transaction);
+        return this.http.post<Transaction>(`${TransactionService.url}.json`, transaction);
     }
 
     getAll(): Observable<Transaction[]> {
-        return this.http.get<Transaction[]>(`http://localhost:3000/transactions`);
+        return this.http.get<Transaction[]>(`${TransactionService.url}.json`)
+            .pipe(map(transactions => {
+                if (!transactions) {
+                    return [];
+                } else {
+                    return Object.keys(transactions)
+                        .map(key => ({...transactions[key], id: key}))
+                }
+            }))
     }
 
-    remove(id: number): Observable<Transaction[]> {
-        return this.http.delete<Transaction[]>(`http://localhost:3000/transactions?id=${id}`);
-
-    }
-    repeat(id: number): Observable<any> {
-        return this.http.get<Transaction>(`http://localhost:3000/transactions?id=${id}`)
-            .pipe(
-                switchMap((data: any)=>{
-                    return data;
-                })
-            )
+    repeat(id: string): Observable<any> {
+        return this.http.get<Transaction[]>(`${TransactionService.url}/${id}.json`)
     }
 
+    remove(id: string): Observable<Transaction[]> {
+        return this.http.delete<Transaction[]>(`${TransactionService.url}/${id}.json`)
+    }
 }

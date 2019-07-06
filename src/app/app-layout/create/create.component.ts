@@ -27,6 +27,7 @@ export class CreateComponent implements OnInit, OnDestroy {
                 this.transactionService.repeat(params.id)
                     .subscribe(data => {
                         if (data) {
+                            console.log(data)
                             this.buildForm(data)
                         }
                     });
@@ -41,7 +42,7 @@ export class CreateComponent implements OnInit, OnDestroy {
         this.buildForm(null);
     }
 
-    private buildForm(data){
+    private buildForm(data) {
         this.form = this.fb.group({
             amount: [this.getField(data, 'amount'), [Validators.required, this.validateByPattern(this.amountPattern)]],
             fio: [this.getField(data, 'fio'), [Validators.required, this.validateByPattern(this.namePattern)]],
@@ -103,7 +104,9 @@ export class CreateComponent implements OnInit, OnDestroy {
                 error => {
                     this.showMessage('Ошибка');
                     this.form.enable();
-                }))
+                }
+            )
+        )
 
     }
 

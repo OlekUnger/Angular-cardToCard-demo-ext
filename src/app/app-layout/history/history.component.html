@@ -1,5 +1,5 @@
-<div class="table-container">
-  <table *ngIf="!loader; else empty">
+<div class="table-container" *ngIf="!loading; else loader">
+  <table *ngIf="transactions.length!==0; else empty">
     <thead>
       <tr>
         <th>№</th>
@@ -26,7 +26,17 @@
   </table>
 
   <ng-template #empty>
-    <p class="text-center">Loading...</p>
+    <p class="text-center">Нет переводов</p>
   </ng-template>
 </div>
+
+<ng-template #loader>
+  <p class="text-center">Loading...</p>
+</ng-template>
+
+
+
+
+
+
 
